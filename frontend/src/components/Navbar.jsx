@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { ShoppingCart, User, LogOut, Menu, X, Search, Home as HomeIcon, Layers } from 'lucide-react';
+import { ShoppingCart, User, LogOut, Menu, X, Search, Home as HomeIcon } from 'lucide-react';
 import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
 
@@ -12,7 +12,6 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const [logoutApiCall] = useLogoutMutation();
 
   const logoutHandler = async () => {
@@ -25,75 +24,101 @@ const Navbar = () => {
     }
   };
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const toggleMenu = () => setMenuOpen((o) => !o);
   const closeMenu = () => setMenuOpen(false);
 
+  const cartCount = cartItems.reduce((a, c) => a + c.qty, 0);
+
   return (
-    <nav className="glass navbar-main">
-      <Link to="/" onClick={closeMenu} className="nav-logo">
-        <h2 style={{ color: 'var(--primary)', letterSpacing: '1px' }}>MERN<span style={{color: 'var(--text-main)'}}>Commerce</span></h2>
-      </Link>
+    <>
+      {/* Backdrop overlay for drawer on mobile */}
+      {menuOpen && (
+        <div
+          onClick={closeMenu}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 998,
+            background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(2px)',
+          }}
+        />
+      )}
 
-      <div className="search-container">
-        <input type="text" placeholder="Search products..." className="search-input" />
-        <button className="search-icon-btn">
-          <Search size={16} />
-        </button>
-      </div>
-
-      <div className="navbar-actions">
-        {/* User Icon - Always Visible */}
-        {userInfo ? (
-          <Link to="/profile" className="nav-icon-link" title="Profile">
-             <User size={22} />
-          </Link>
-        ) : (
-          <Link to="/login" className="nav-icon-link" title="Sign In">
-             <User size={22} />
-          </Link>
-        )}
-
-        {/* Cart Icon - Always Visible */}
-        <Link to="/cart" className="nav-icon-link" title="Cart">
-          <ShoppingCart size={22} />
-          {cartItems.length > 0 && (
-            <span className="cart-badge" style={{
-              position: 'absolute', top: '-8px', right: '-12px', background: 'var(--primary)', color: 'white', borderRadius: '50%', padding: '2px 6px', fontSize: '0.7rem', fontWeight: 'bold'
-            }}>
-              {cartItems.reduce((a, c) => a + c.qty, 0)}
-            </span>
-          )}
+      <nav className="glass navbar-main">
+        {/* ── Logo ── */}
+        <Link to="/" onClick={closeMenu} className="nav-logo">
+          <span className="logo-mern">MERN</span><span className="logo-commerce">Commerce</span>
         </Link>
 
-        {/* Hamburger Menu Toggle */}
-        <button className="mobile-toggle" onClick={toggleMenu}>
-          {menuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
+        {/* ── Search (desktop only) ── */}
+        <div className="nav-search">
+          <input type="text" placeholder="Search products, brands…" className="search-input" />
+          <button className="search-icon-btn" aria-label="Search">
+            <Search size={16} />
+          </button>
+        </div>
 
-      {/* Slide-out Drawer */}
-      <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-        <div className="drawer-section">
-          <span className="drawer-title">General</span>
-          <Link to="/" onClick={closeMenu} className="drawer-link">
-             <HomeIcon size={18} style={{marginRight: '8px', verticalAlign: 'middle'}}/> Home
-          </Link>
-          {userInfo && (
-            <button onClick={() => { logoutHandler(); closeMenu(); }} className="drawer-link" style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', cursor: 'pointer', fontFamily: 'inherit' }}>
-               <LogOut size={18} style={{marginRight: '8px', verticalAlign: 'middle'}}/> Sign Out
+        {/* ── Right-side actions ── */}
+        <div className="navbar-actions">
+
+          {/* Sign In / Account — desktop label visible, mobile hidden */}
+          {userInfo ? (
+            <button onClick={() => { logoutHandler(); }} className="nav-action-btn desktop-only" title="Sign Out">
+              <User size={20} />
+              <span className="nav-action-label">{userInfo.name.split(' ')[0]}</span>
             </button>
+          ) : (
+            <Link to="/login" className="nav-action-btn desktop-only" title="Sign In">
+              <User size={20} />
+              <span className="nav-action-label">Sign In</span>
+            </Link>
           )}
+
+          {/* Cart — always icon, desktop shows label */}
+          <Link to="/cart" className="nav-action-btn cart-btn" title="Cart">
+            <div className="cart-icon-wrap">
+              <ShoppingCart size={20} />
+              {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+            </div>
+            <span className="nav-action-label">Cart</span>
+          </Link>
+
+          {/* Hamburger — always visible */}
+          <button className="hamburger-btn" onClick={toggleMenu} aria-label="Menu">
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
 
-        <div className="drawer-section">
-          <span className="drawer-title">Categories</span>
-          <Link to="/category/electronics" onClick={closeMenu} className="drawer-link">Electronics</Link>
-          <Link to="/category/books" onClick={closeMenu} className="drawer-link">Books</Link>
-          <Link to="/category/home-kitchen" onClick={closeMenu} className="drawer-link">Home & Kitchen</Link>
-          <Link to="/category/fashion" onClick={closeMenu} className="drawer-link">Fashion</Link>
+        {/* ── Slide-out Drawer ── */}
+        <div className={`nav-drawer ${menuOpen ? 'open' : ''}`}>
+          <div className="drawer-section">
+            <span className="drawer-title">General</span>
+            <Link to="/" onClick={closeMenu} className="drawer-link">
+              <HomeIcon size={16} /> Home
+            </Link>
+            {!userInfo && (
+              <Link to="/login" onClick={closeMenu} className="drawer-link">
+                <User size={16} /> Sign In
+              </Link>
+            )}
+            {userInfo && (
+              <button
+                onClick={() => { logoutHandler(); closeMenu(); }}
+                className="drawer-link drawer-btn"
+              >
+                <LogOut size={16} /> Sign Out
+              </button>
+            )}
+          </div>
+
+          <div className="drawer-section">
+            <span className="drawer-title">Categories</span>
+            <Link to="/category/electronics" onClick={closeMenu} className="drawer-link">Electronics</Link>
+            <Link to="/category/books" onClick={closeMenu} className="drawer-link">Books</Link>
+            <Link to="/category/home-kitchen" onClick={closeMenu} className="drawer-link">Home &amp; Kitchen</Link>
+            <Link to="/category/fashion" onClick={closeMenu} className="drawer-link">Fashion</Link>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 };
 
