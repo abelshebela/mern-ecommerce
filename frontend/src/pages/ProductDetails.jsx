@@ -23,34 +23,35 @@ const ProductDetails = () => {
     if (error) return <div className="container">{error?.data?.message || error.error}</div>;
 
     return (
-        <div className="container" style={{ padding: '2rem 1rem' }}>
-            <Link to="/" className="btn btn-ghost" style={{ marginBottom: '2rem', display: 'inline-flex' }}>
+        <div className="container product-details-container">
+            <Link to="/" className="btn btn-ghost back-btn">
                 <ArrowLeft size={18} /> Go Back
             </Link>
             <div className="product-details-grid">
-                <img src={product.image} alt={product.name} style={{ width: '100%', borderRadius: '12px' }} />
-                <div>
-                   <h2 style={{ fontSize: '2rem' }}>{product.name}</h2>
-                   <div style={{ display: 'flex', gap: '0.5rem', margin: '1rem 0' }}>
+                <div className="product-image-section">
+                    <img src={product.image} alt={product.name} />
+                </div>
+                <div className="product-info-section">
+                   <h2 className="product-title">{product.name}</h2>
+                   <div className="product-rating">
                        <Star size={20} fill="#fbbf24" stroke="none" />
-                       <span style={{color: '#fbbf24'}}>{product.rating}</span>
-                       <span style={{ color: 'var(--text-muted)' }}>({product.numReviews} reviews)</span>
+                       <span className="rating-score">{product.rating}</span>
+                       <span className="review-count">({product.numReviews} reviews)</span>
                    </div>
-                   <h3 className="product-price" style={{ fontSize: '2.5rem', color: 'var(--primary)', marginBottom: '1.5rem' }}>${product.price}</h3>
-                   <p style={{ color: 'var(--text-muted)', lineHeight: '1.6', marginBottom: '2rem' }}>{product.description}</p>
+                   <h3 className="product-price">${product.price}</h3>
+                   <p className="product-description">{product.description}</p>
                    
-                   <div className="glass" style={{ padding: '1.5rem' }}>
-                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', borderBottom: '1px solid var(--border)', paddingBottom: '1rem' }}>
+                   <div className="glass purchase-card">
+                       <div className="purchase-row">
                            <span>Status:</span>
                            <strong>{product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}</strong>
                        </div>
 
                        {product.countInStock > 0 && (
-                           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', borderBottom: '1px solid var(--border)', paddingBottom: '1rem' }}>
+                           <div className="purchase-row">
                                <span>Qty:</span>
                                <select 
-                                   className="form-input" 
-                                   style={{ width: 'auto' }} 
+                                   className="form-input qty-select" 
                                    value={qty} 
                                    onChange={(e) => setQty(Number(e.target.value))}
                                >
@@ -62,8 +63,7 @@ const ProductDetails = () => {
                        )}
 
                        <button 
-                         className="btn btn-primary" 
-                         style={{ width: '100%' }} 
+                         className="btn btn-primary add-btn" 
                          disabled={product.countInStock === 0}
                          onClick={addToCartHandler}
                        >
@@ -77,8 +77,7 @@ const ProductDetails = () => {
             {product.countInStock > 0 && (
               <div className="mobile-cta">
                 <button 
-                  className="btn btn-primary" 
-                  style={{ width: '100%' }} 
+                  className="btn btn-primary sticky-add-btn" 
                   onClick={addToCartHandler}
                 >
                   <ShoppingCart size={18} /> Add To Cart - ${product.price}

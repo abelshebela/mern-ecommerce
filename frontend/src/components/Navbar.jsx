@@ -29,41 +29,33 @@ const Navbar = () => {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <nav className="glass" style={{
-      position: 'sticky', top: '10px', zIndex: 100, margin: '10px 20px', padding: '1rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
-    }}>
-      <Link to="/" onClick={closeMenu}>
+    <nav className="glass navbar-main">
+      <Link to="/" onClick={closeMenu} className="nav-logo">
         <h2 style={{ color: 'var(--primary)', letterSpacing: '1px' }}>MERN<span style={{color: 'var(--text-main)'}}>Commerce</span></h2>
       </Link>
 
-      <button className="mobile-toggle" onClick={toggleMenu}>
-        {menuOpen ? <X size={24} /> : <Menu size={24} />}
+      <button className="mobile-toggle" onClick={toggleMenu} aria-label="Toggle Navigation">
+        {menuOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
-      <div className={`nav-links ${menuOpen ? 'open' : ''}`} style={{ 
-        display: 'flex', 
-        gap: '1.5rem', 
-        alignItems: 'center'
-      }}>
-        <Link to="/cart" onClick={closeMenu} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-muted)', position: 'relative' }}>
-          <ShoppingCart size={20} /> Cart
+      <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
+        <Link to="/cart" onClick={closeMenu} className="nav-link cart-link">
+          <ShoppingCart size={20} /> <span className="link-text">Cart</span>
           {cartItems.length > 0 && (
-            <span style={{
-              position: 'absolute', top: '-8px', right: '-8px', background: 'var(--primary)', color: 'white', borderRadius: '50%', padding: '2px 6px', fontSize: '0.7rem'
-            }}>
+            <span className="cart-badge">
               {cartItems.reduce((a, c) => a + c.qty, 0)}
             </span>
           )}
         </Link>
         {userInfo ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }} className="user-nav">
-            <span style={{ color: 'var(--text-main)', fontWeight: '500' }}>{userInfo.name.split(' ')[0]}</span>
-            <button onClick={() => { logoutHandler(); closeMenu(); }} className="btn btn-ghost" style={{ padding: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+          <div className="user-nav">
+            <span className="user-name">{userInfo.name.split(' ')[0]}</span>
+            <button onClick={() => { logoutHandler(); closeMenu(); }} className="btn btn-ghost logout-btn">
               <LogOut size={16} /> Logout
             </button>
           </div>
         ) : (
-          <Link to="/login" onClick={closeMenu} className="btn btn-primary" style={{ padding: '0.5rem 1rem' }}>
+          <Link to="/login" onClick={closeMenu} className="btn btn-primary login-btn">
             <User size={18} /> Sign In
           </Link>
         )}

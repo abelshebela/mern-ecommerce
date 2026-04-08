@@ -23,27 +23,26 @@ const Cart = () => {
     };
 
     return (
-        <div className="container" style={{ padding: '2rem 1rem' }}>
-            <h1 style={{ marginBottom: '2rem' }}>Shopping Cart</h1>
+        <div className="container cart-container">
+            <h1 className="cart-title">Shopping Cart</h1>
             {cartItems.length === 0 ? (
-                <div className="glass" style={{ padding: '2rem', textAlign: 'center' }}>
-                    <p style={{ color: 'var(--text-muted)', marginBottom: '1rem' }}>Your cart is currently empty.</p>
+                <div className="glass empty-cart">
+                    <p>Your cart is currently empty.</p>
                     <Link to="/" className="btn btn-primary">Go Shopping</Link>
                 </div>
             ) : (
                 <div className="cart-layout">
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    <div className="cart-items-list">
                         {cartItems.map((item) => (
-                            <div key={item._id} className="glass cart-item" style={{ padding: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                <img src={item.image} alt={item.name} className="cart-item-img" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px' }} />
-                                <div style={{ flex: 1 }}>
-                                    <Link to={`/product/${item._id}`} style={{ fontWeight: '600' }}>{item.name}</Link>
-                                    <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>${item.price}</div>
+                            <div key={item._id} className="glass cart-item">
+                                <img src={item.image} alt={item.name} className="cart-item-img" />
+                                <div className="cart-item-info">
+                                    <Link to={`/product/${item._id}`} className="item-name">{item.name}</Link>
+                                    <div className="item-price">${item.price}</div>
                                 </div>
-                                <div className="cart-item-actions" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                <div className="cart-item-actions">
                                     <select 
-                                        className="form-input" 
-                                        style={{ width: 'auto' }} 
+                                        className="form-input qty-select" 
                                         value={item.qty} 
                                         onChange={(e) => addToCartHandler(item, Number(e.target.value))}
                                     >
@@ -51,19 +50,19 @@ const Cart = () => {
                                             <option key={x + 1} value={x + 1}>{x + 1}</option>
                                         ))}
                                     </select>
-                                    <button className="btn btn-ghost" style={{ padding: '0.5rem', color: 'var(--danger)' }} onClick={() => removeFromCartHandler(item._id)}>
+                                    <button className="btn btn-ghost remove-btn" onClick={() => removeFromCartHandler(item._id)}>
                                         <Trash2 size={18} />
                                     </button>
                                 </div>
                             </div>
                         ))}
                     </div>
-                    <div className="glass cart-summary" style={{ padding: '1.5rem', height: 'fit-content' }}>
-                        <h2 style={{ fontSize: '1.2rem', marginBottom: '1.5rem' }}>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
-                        <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1.5rem', color: 'var(--primary)' }}>
+                    <div className="glass cart-summary">
+                        <h2 className="summary-title">Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
+                        <div className="summary-total">
                             ${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
                         </div>
-                        <button className="btn btn-primary" style={{ width: '100%' }} onClick={checkoutHandler}>
+                        <button className="btn btn-primary checkout-btn" onClick={checkoutHandler}>
                             Proceed To Checkout
                         </button>
                     </div>
