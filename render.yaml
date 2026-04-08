@@ -3,6 +3,7 @@ services:
     name: mern-ecommerce-backend
     env: node
     plan: free
+    region: oregon
     buildCommand: npm run build
     startCommand: npm start
     envVars:
@@ -12,5 +13,15 @@ services:
         sync: false
       - key: JWT_SECRET
         sync: false
-      - key: PORT
-        value: 10000
+      - key: FRONTEND_URL
+        sync: false
+      - key: EMAIL_HOST
+        sync: false
+      - key: EMAIL_PORT
+        sync: false
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASSWORD
+        sync: false
+      - key: EMAIL_FROM
+        sync: false

@@ -4,8 +4,10 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
-// Load env vars at the very top
-dotenv.config({ path: path.resolve(__dirname, '.env') });
+// Load env vars — works locally; on Render, env vars are injected by the platform
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config({ path: path.resolve(__dirname, '.env') });
+}
 
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
@@ -22,7 +24,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+    origin: process.env.NODE_ENV === 'production'
+        ? process.env.FRONTEND_URL
+        : 'http://localhost:5173',
+    credentials: true,
+}));
+
+// Health check endpoint — keeps Render from marking service as down
+app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
 
 // API Routes
 app.use('/api/users', userRoutes);
