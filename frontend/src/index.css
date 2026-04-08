@@ -170,6 +170,106 @@ h1, h2, h3 {
   }
 }
 
+/* --- Mobile Navbar (Hamburger) --- */
+.mobile-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-toggle {
+    display: block !important;
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    right: 20px;
+    flex-direction: column !important;
+    background: rgba(15, 23, 42, 0.95) !important;
+    backdrop-filter: blur(20px);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    transform: translateY(-150%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 99;
+  }
+
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* --- Responsive Cart & Layouts --- */
+.cart-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .cart-layout {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .cart-item {
+    flex-direction: column !important;
+    text-align: center;
+  }
+
+  .cart-item-img {
+    width: 100% !important;
+    height: 150px !important;
+  }
+
+  .cart-item-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* --- Product Detail Responsive --- */
+.product-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+@media (max-width: 768px) {
+  .product-details-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .mobile-cta {
+    display: block !important;
+    position: fixed !important;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    border-top: 1px solid var(--border);
+    z-index: 1000;
+  }
+
+  /* Increase main content padding to account for sticky bar */
+  .main-content {
+    padding-bottom: 6rem !important;
+  }
+}
+
 /* Animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }

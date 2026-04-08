@@ -27,7 +27,7 @@ const ProductDetails = () => {
             <Link to="/" className="btn btn-ghost" style={{ marginBottom: '2rem', display: 'inline-flex' }}>
                 <ArrowLeft size={18} /> Go Back
             </Link>
-            <div className="product-details-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
+            <div className="product-details-grid">
                 <img src={product.image} alt={product.name} style={{ width: '100%', borderRadius: '12px' }} />
                 <div>
                    <h2 style={{ fontSize: '2rem' }}>{product.name}</h2>
@@ -36,7 +36,7 @@ const ProductDetails = () => {
                        <span style={{color: '#fbbf24'}}>{product.rating}</span>
                        <span style={{ color: 'var(--text-muted)' }}>({product.numReviews} reviews)</span>
                    </div>
-                   <h3 style={{ fontSize: '2.5rem', color: 'var(--primary)', marginBottom: '1.5rem' }}>${product.price}</h3>
+                   <h3 className="product-price" style={{ fontSize: '2.5rem', color: 'var(--primary)', marginBottom: '1.5rem' }}>${product.price}</h3>
                    <p style={{ color: 'var(--text-muted)', lineHeight: '1.6', marginBottom: '2rem' }}>{product.description}</p>
                    
                    <div className="glass" style={{ padding: '1.5rem' }}>
@@ -75,11 +75,7 @@ const ProductDetails = () => {
 
             {/* Mobile Sticky CTA */}
             {product.countInStock > 0 && (
-              <div className="mobile-cta" style={{
-                position: 'fixed', bottom: 0, left: 0, right: 0, background: 'rgba(15, 23, 42, 0.95)', 
-                backdropFilter: 'blur(10px)', padding: '1rem', borderTop: '1px solid var(--border)', 
-                zIndex: 100, display: 'none'
-              }}>
+              <div className="mobile-cta">
                 <button 
                   className="btn btn-primary" 
                   style={{ width: '100%' }} 
@@ -89,19 +85,6 @@ const ProductDetails = () => {
                 </button>
               </div>
             )}
-
-            <style>{`
-              @media (max-width: 768px) {
-                .product-details-grid { 
-                  grid-template-columns: 1fr !important; 
-                  gap: 2rem !important; 
-                }
-                .mobile-cta { display: block !important; }
-                h2 { font-size: 1.5rem !important; }
-                h3 { font-size: 1.8rem !important; }
-                .main-content { padding-bottom: 5rem !important; }
-              }
-            `}</style>
         </div>
     );
 };

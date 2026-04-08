@@ -31,7 +31,7 @@ const Cart = () => {
                     <Link to="/" className="btn btn-primary">Go Shopping</Link>
                 </div>
             ) : (
-                <div className="cart-layout" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem' }}>
+                <div className="cart-layout">
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         {cartItems.map((item) => (
                             <div key={item._id} className="glass cart-item" style={{ padding: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -69,17 +69,6 @@ const Cart = () => {
                     </div>
                 </div>
             )}
-
-            <style>{`
-                @media (max-width: 900px) {
-                    .cart-layout { grid-template-columns: 1fr !important; }
-                }
-                @media (max-width: 640px) {
-                    .cart-item { flex-direction: column; text-align: center; }
-                    .cart-item-img { width: 100% !important; height: 150px !important; }
-                    .cart-item-actions { width: 100%; justify-content: space-between; }
-                }
-            `}</style>
         </div>
     );
 };
