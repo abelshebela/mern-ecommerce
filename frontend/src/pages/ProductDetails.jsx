@@ -63,7 +63,7 @@ const ProductDetails = () => {
                        )}
 
                        <button 
-                         className="btn btn-primary add-btn" 
+                         className="btn btn-primary add-btn hide-on-mobile" 
                          disabled={product.countInStock === 0}
                          onClick={addToCartHandler}
                        >
