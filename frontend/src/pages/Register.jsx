@@ -10,11 +10,12 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+    const [error, setError] = useState('');
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [register, { isLoading }] = useRegisterMutation();
+    const [register, { isLoading, error: err }] = useRegisterMutation();
 
     const { userInfo } = useSelector((state) => state.auth);
 
@@ -31,9 +32,10 @@ const Register = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         setSuccessMessage('');
+        setError('');
         
         if (password !== confirmPassword) {
-            alert('Passwords do not match');
+            setError('Passwords do not match');
         } else {
             try {
                 const res = await register({ name, email, password }).unwrap();
@@ -43,7 +45,7 @@ const Register = () => {
                     navigate('/verification-notice');
                 }, 3000);
             } catch (err) {
-                alert(err?.data?.message || err.error);
+                // Error handled by Redux mutation error state or manually if needed
             }
         }
     };
@@ -56,6 +58,12 @@ const Register = () => {
                 {successMessage && (
                     <div className="alert alert-success" style={{ marginBottom: '1.5rem', padding: '1rem', backgroundColor: 'rgba(34, 197, 94, 0.2)', border: '1px solid var(--primary)', borderRadius: '8px', color: '#4ade80', textAlign: 'center' }}>
                         {successMessage}
+                    </div>
+                )}
+
+                {(error || err) && (
+                    <div className="alert alert-danger" style={{ marginBottom: '1.5rem', padding: '1rem', backgroundColor: 'rgba(239, 68, 68, 0.2)', border: '1px solid #ef4444', borderRadius: '8px', color: '#f87171', textAlign: 'center' }}>
+                        {error || err?.data?.message || err.error}
                     </div>
                 )}
                 

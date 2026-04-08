@@ -32,7 +32,7 @@ const Login = () => {
             dispatch(setCredentials({ ...res }));
             navigate(redirect);
         } catch (err) {
-            alert(err?.data?.message || err.error);
+            // Error handling is managed by the {err && ...} block in the JSX
         }
     };
 

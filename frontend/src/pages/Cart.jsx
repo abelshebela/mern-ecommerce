@@ -31,32 +31,34 @@ const Cart = () => {
                     <Link to="/" className="btn btn-primary">Go Shopping</Link>
                 </div>
             ) : (
-                <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem' }}>
+                <div className="cart-layout" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         {cartItems.map((item) => (
-                            <div key={item._id} className="glass" style={{ padding: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                <img src={item.image} alt={item.name} style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px' }} />
+                            <div key={item._id} className="glass cart-item" style={{ padding: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                <img src={item.image} alt={item.name} className="cart-item-img" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px' }} />
                                 <div style={{ flex: 1 }}>
                                     <Link to={`/product/${item._id}`} style={{ fontWeight: '600' }}>{item.name}</Link>
                                     <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>${item.price}</div>
                                 </div>
-                                <select 
-                                    className="form-input" 
-                                    style={{ width: 'auto' }} 
-                                    value={item.qty} 
-                                    onChange={(e) => addToCartHandler(item, Number(e.target.value))}
-                                >
-                                    {[...Array(item.countInStock).keys()].map((x) => (
-                                        <option key={x + 1} value={x + 1}>{x + 1}</option>
-                                    ))}
-                                </select>
-                                <button className="btn btn-ghost" style={{ padding: '0.5rem', color: 'var(--danger)' }} onClick={() => removeFromCartHandler(item._id)}>
-                                    <Trash2 size={18} />
-                                </button>
+                                <div className="cart-item-actions" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                    <select 
+                                        className="form-input" 
+                                        style={{ width: 'auto' }} 
+                                        value={item.qty} 
+                                        onChange={(e) => addToCartHandler(item, Number(e.target.value))}
+                                    >
+                                        {[...Array(item.countInStock).keys()].map((x) => (
+                                            <option key={x + 1} value={x + 1}>{x + 1}</option>
+                                        ))}
+                                    </select>
+                                    <button className="btn btn-ghost" style={{ padding: '0.5rem', color: 'var(--danger)' }} onClick={() => removeFromCartHandler(item._id)}>
+                                        <Trash2 size={18} />
+                                    </button>
+                                </div>
                             </div>
                         ))}
                     </div>
-                    <div className="glass" style={{ padding: '1.5rem', height: 'fit-content' }}>
+                    <div className="glass cart-summary" style={{ padding: '1.5rem', height: 'fit-content' }}>
                         <h2 style={{ fontSize: '1.2rem', marginBottom: '1.5rem' }}>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
                         <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1.5rem', color: 'var(--primary)' }}>
                             ${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
@@ -67,7 +69,19 @@ const Cart = () => {
                     </div>
                 </div>
             )}
+
+            <style>{`
+                @media (max-width: 900px) {
+                    .cart-layout { grid-template-columns: 1fr !important; }
+                }
+                @media (max-width: 640px) {
+                    .cart-item { flex-direction: column; text-align: center; }
+                    .cart-item-img { width: 100% !important; height: 150px !important; }
+                    .cart-item-actions { width: 100%; justify-content: space-between; }
+                }
+            `}</style>
         </div>
     );
 };
+
 export default Cart;
