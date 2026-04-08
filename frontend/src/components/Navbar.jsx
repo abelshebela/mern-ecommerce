@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { ShoppingCart, User, LogOut, Menu, X, Search, Home as HomeIcon } from 'lucide-react';
+import { ShoppingCart, User, Menu, X, Search, Home as HomeIcon } from 'lucide-react';
 import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
 
@@ -59,14 +59,14 @@ const Navbar = () => {
         {/* ── Right-side actions ── */}
         <div className="navbar-actions">
 
-          {/* Sign In / Account — desktop label visible, mobile hidden */}
+          {/* Sign In / Account — always visible, label hidden on mobile via CSS */}
           {userInfo ? (
-            <button onClick={() => { logoutHandler(); }} className="nav-action-btn desktop-only" title="Sign Out">
+            <button onClick={logoutHandler} className="nav-action-btn" title="Sign Out">
               <User size={20} />
               <span className="nav-action-label">{userInfo.name.split(' ')[0]}</span>
             </button>
           ) : (
-            <Link to="/login" className="nav-action-btn desktop-only" title="Sign In">
+            <Link to="/login" className="nav-action-btn" title="Sign In">
               <User size={20} />
               <span className="nav-action-label">Sign In</span>
             </Link>
@@ -94,19 +94,6 @@ const Navbar = () => {
             <Link to="/" onClick={closeMenu} className="drawer-link">
               <HomeIcon size={16} /> Home
             </Link>
-            {!userInfo && (
-              <Link to="/login" onClick={closeMenu} className="drawer-link">
-                <User size={16} /> Sign In
-              </Link>
-            )}
-            {userInfo && (
-              <button
-                onClick={() => { logoutHandler(); closeMenu(); }}
-                className="drawer-link drawer-btn"
-              >
-                <LogOut size={16} /> Sign Out
-              </button>
-            )}
           </div>
 
           <div className="drawer-section">
