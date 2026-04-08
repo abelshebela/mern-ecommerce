@@ -8,10 +8,17 @@ import Register from './pages/Register';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import PrivateRoute from './components/PrivateRoute';
+import VerificationBanner from './components/VerificationBanner';
+
+import VerificationNotice from './pages/VerificationNotice';
+import VerifyEmail from './pages/VerifyEmail';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 const App = () => {
   return (
     <Router>
+      <VerificationBanner />
       <Navbar />
       <main className="main-content">
         <Routes>
@@ -20,6 +27,10 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/verification-notice" element={<VerificationNotice />} />
+          <Route path="/verify/:token" element={<VerifyEmail />} />
           
           {/* Protected Routes */}
           <Route path="" element={<PrivateRoute />}>
