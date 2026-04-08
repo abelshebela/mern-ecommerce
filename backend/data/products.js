@@ -1,0 +1,48 @@
+const products = [
+  {
+    name: 'AirPods Pro',
+    image: 'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    description: 'Premium Wireless earbuds with Active Noise Cancellation.',
+    brand: 'Apple',
+    category: 'Electronics',
+    price: 249.99,
+    countInStock: 10,
+    rating: 4.5,
+    numReviews: 12,
+  },
+  {
+    name: 'iPhone 15 Pro Max',
+    image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    description: 'Forged in titanium and featuring the groundbreaking A17 Pro chip.',
+    brand: 'Apple',
+    category: 'Electronics',
+    price: 1199.99,
+    countInStock: 7,
+    rating: 5.0,
+    numReviews: 8,
+  },
+  {
+    name: 'Sony WH-1000XM5',
+    image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    description: 'Industry leading noise cancelling headphones.',
+    brand: 'Sony',
+    category: 'Electronics',
+    price: 349.99,
+    countInStock: 5,
+    rating: 4.8,
+    numReviews: 15,
+  },
+  {
+    name: 'MacBook Air M2',
+    image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    description: 'Supercharged by M2. Strikingly thin design.',
+    brand: 'Apple',
+    category: 'Electronics',
+    price: 1199.99,
+    countInStock: 11,
+    rating: 4.9,
+    numReviews: 20,
+  },
+];
+
+module.exports = products;
