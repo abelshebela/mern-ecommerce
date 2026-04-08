@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: mern-ecommerce
+    name: mern-ecommerce-backend
     env: node
     plan: free
     buildCommand: npm run build
