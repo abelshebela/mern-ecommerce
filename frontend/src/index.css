@@ -61,10 +61,31 @@ a {
   top: 10px;
   z-index: 1000;
   margin: 10px 20px;
-  padding: 1rem 2rem;
+  padding: 0.8rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
+}
+
+.nav-logo h2 {
+  font-size: 1.1rem !important;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.nav-icon-link {
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
 }
 
 .nav-links {
@@ -107,32 +128,48 @@ a {
   .nav-links {
     position: fixed;
     top: 80px;
-    left: 10px;
-    right: 10px;
+    right: 20px;
+    width: 250px;
     flex-direction: column;
     background: rgba(15, 23, 42, 0.98);
     backdrop-filter: blur(20px);
     padding: 2rem;
     border-radius: 15px;
     border: 1px solid var(--border);
-    transform: translateY(-150%);
+    transform: translateX(120%);
     opacity: 0;
     pointer-events: none;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    align-items: flex-start !important;
+    gap: 1.5rem !important;
   }
 
   .nav-links.open {
-    transform: translateY(0);
+    transform: translateX(0);
     opacity: 1;
     pointer-events: auto;
   }
 
-  .user-nav {
-    flex-direction: column;
+  .drawer-section {
     width: 100%;
-    gap: 1rem;
-    align-items: center;
+  }
+
+  .drawer-title {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .drawer-link {
+    display: block;
+    padding: 0.5rem 0;
+    color: var(--text-main);
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
   }
 }
 

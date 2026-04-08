@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { ShoppingCart, User, LogOut, Menu, X, Search, ChevronDown } from 'lucide-react';
+import { ShoppingCart, User, LogOut, Menu, X, Search, Home as HomeIcon, Layers } from 'lucide-react';
 import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
 
@@ -34,51 +34,64 @@ const Navbar = () => {
         <h2 style={{ color: 'var(--primary)', letterSpacing: '1px' }}>MERN<span style={{color: 'var(--text-main)'}}>Commerce</span></h2>
       </Link>
 
-      {/* Amazon-style Search Bar */}
       <div className="search-container">
-        <input type="text" placeholder="Search products, brands, and more..." className="search-input" />
+        <input type="text" placeholder="Search products..." className="search-input" />
         <button className="search-icon-btn">
-          <Search size={18} />
+          <Search size={16} />
         </button>
       </div>
 
-      <button className="mobile-toggle" onClick={toggleMenu} aria-label="Toggle Navigation">
-        {menuOpen ? <X size={28} /> : <Menu size={28} />}
-      </button>
-
-      <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-        
-        {/* Amazon-style Account Section */}
+      <div className="navbar-actions">
+        {/* User Icon - Always Visible */}
         {userInfo ? (
-          <div className="nav-text-container" onClick={() => { /* Potential Dropdown Toggle */ }}>
-            <span className="nav-text-top">Hello, {userInfo.name.split(' ')[0]}</span>
-            <span className="nav-text-bottom">Account & Lists <ChevronDown size={14} /></span>
-            
-            {/* Simple logout button for now, can be part of a dropdown later */}
-            <button onClick={(e) => { e.stopPropagation(); logoutHandler(); closeMenu(); }} className="btn btn-ghost logout-btn" style={{ marginTop: '0.5rem', padding: '0.2rem 0.5rem', fontSize: '0.75rem' }}>
-              <LogOut size={12} /> Logout
-            </button>
-          </div>
+          <Link to="/profile" className="nav-icon-link" title="Profile">
+             <User size={22} />
+          </Link>
         ) : (
-          <Link to="/login" onClick={closeMenu} className="nav-text-container">
-            <span className="nav-text-top">Hello, sign in</span>
-            <span className="nav-text-bottom">Account & Lists <ChevronDown size={14} /></span>
+          <Link to="/login" className="nav-icon-link" title="Sign In">
+             <User size={22} />
           </Link>
         )}
 
-        <Link to="/cart" onClick={closeMenu} className="nav-link cart-link">
-          <div style={{ position: 'relative' }}>
-            <ShoppingCart size={24} />
-            {cartItems.length > 0 && (
-              <span className="cart-badge" style={{
-                position: 'absolute', top: '-10px', right: '-10px', background: 'var(--primary)', color: 'white', borderRadius: '50%', padding: '2px 6px', fontSize: '0.75rem', fontWeight: 'bold'
-              }}>
-                {cartItems.reduce((a, c) => a + c.qty, 0)}
-              </span>
-            )}
-          </div>
-          <span className="nav-text-bottom">Cart</span>
+        {/* Cart Icon - Always Visible */}
+        <Link to="/cart" className="nav-icon-link" title="Cart">
+          <ShoppingCart size={22} />
+          {cartItems.length > 0 && (
+            <span className="cart-badge" style={{
+              position: 'absolute', top: '-8px', right: '-12px', background: 'var(--primary)', color: 'white', borderRadius: '50%', padding: '2px 6px', fontSize: '0.7rem', fontWeight: 'bold'
+            }}>
+              {cartItems.reduce((a, c) => a + c.qty, 0)}
+            </span>
+          )}
         </Link>
+
+        {/* Hamburger Menu Toggle */}
+        <button className="mobile-toggle" onClick={toggleMenu}>
+          {menuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
+
+      {/* Slide-out Drawer */}
+      <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
+        <div className="drawer-section">
+          <span className="drawer-title">General</span>
+          <Link to="/" onClick={closeMenu} className="drawer-link">
+             <HomeIcon size={18} style={{marginRight: '8px', verticalAlign: 'middle'}}/> Home
+          </Link>
+          {userInfo && (
+            <button onClick={() => { logoutHandler(); closeMenu(); }} className="drawer-link" style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', cursor: 'pointer', fontFamily: 'inherit' }}>
+               <LogOut size={18} style={{marginRight: '8px', verticalAlign: 'middle'}}/> Sign Out
+            </button>
+          )}
+        </div>
+
+        <div className="drawer-section">
+          <span className="drawer-title">Categories</span>
+          <Link to="/category/electronics" onClick={closeMenu} className="drawer-link">Electronics</Link>
+          <Link to="/category/books" onClick={closeMenu} className="drawer-link">Books</Link>
+          <Link to="/category/home-kitchen" onClick={closeMenu} className="drawer-link">Home & Kitchen</Link>
+          <Link to="/category/fashion" onClick={closeMenu} className="drawer-link">Fashion</Link>
+        </div>
       </div>
     </nav>
   );
