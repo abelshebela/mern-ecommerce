@@ -114,32 +114,32 @@ const Home = () => {
                   <ul style={{listStyle: 'none', padding: 0, margin: 0, color: '#dddddd', lineHeight: '2.2', fontSize:'14px'}}>
                      <li>Careers</li>
                      <li>Blog</li>
-                     <li>About Shemsu</li>
+                     <li>About Shemsu Suk</li>
                      <li>Investor Relations</li>
                   </ul>
                </div>
                <div>
                   <h4 style={{marginBottom: '10px', fontSize: '16px'}}>Make Money with Us</h4>
                   <ul style={{listStyle: 'none', padding: 0, margin: 0, color: '#dddddd', lineHeight: '2.2', fontSize:'14px'}}>
-                     <li>Sell products on Shemsu</li>
-                     <li>Sell on Shemsu Business</li>
+                     <li>Sell products on Shemsu Suk</li>
+                     <li>Sell on Shemsu Suk Business</li>
                      <li>Become an Affiliate</li>
                      <li>Advertise Your Products</li>
                   </ul>
                </div>
                <div>
-                  <h4 style={{marginBottom: '10px', fontSize: '16px'}}>Shemsu Payment Products</h4>
+                  <h4 style={{marginBottom: '10px', fontSize: '16px'}}>Shemsu Suk Payment Products</h4>
                   <ul style={{listStyle: 'none', padding: 0, margin: 0, color: '#dddddd', lineHeight: '2.2', fontSize:'14px'}}>
-                     <li>Shemsu Business Card</li>
+                     <li>Shemsu Suk Business Card</li>
                      <li>Shop with Points</li>
                      <li>Reload Your Balance</li>
-                     <li>Shemsu Currency Converter</li>
+                     <li>Shemsu Suk Currency Converter</li>
                   </ul>
                </div>
                <div>
                   <h4 style={{marginBottom: '10px', fontSize: '16px'}}>Let Us Help You</h4>
                   <ul style={{listStyle: 'none', padding: 0, margin: 0, color: '#dddddd', lineHeight: '2.2', fontSize:'14px'}}>
-                     <li>Shemsu and COVID-19</li>
+                     <li>Shemsu Suk and COVID-19</li>
                      <li>Your Account</li>
                      <li>Your Orders</li>
                      <li>Shipping Rates &amp; Policies</li>
@@ -150,7 +150,7 @@ const Home = () => {
          </div>
          <div style={{background: '#131921', color: '#dddddd', textAlign: 'center', padding: '20px 0', fontSize: '12px'}}>
             <div style={{marginBottom: '5px'}}>Conditions of Use &nbsp;&nbsp; Privacy Notice &nbsp;&nbsp; Consumer Health Data Privacy Disclosure</div>
-            <div>© 1996-2026, Shemsu.com, Inc. or its affiliates</div>
+            <div>© 1996-2026, Shemsu Suk.com, Inc. or its affiliates</div>
          </div>
       </footer>
 

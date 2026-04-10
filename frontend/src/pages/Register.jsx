@@ -50,7 +50,10 @@ const Register = () => {
         <div style={{background: 'white', minHeight: '100vh'}}>
             <div className="amz-auth-container">
                 <Link to="/" style={{textDecoration: 'none'}}>
-                   <div className="amz-auth-logo">Shemsu<span>PRO</span></div>
+                   <div className="amz-auth-logo">
+                       <img src="/favicon.svg" alt="" style={{width: '40px', height: '40px', marginRight: '8px', verticalAlign: 'middle'}} />
+                       <span style={{verticalAlign: 'middle'}}>Shemsu Suk</span>
+                   </div>
                 </Link>
 
                 <div className="amz-auth-box">
@@ -104,7 +107,7 @@ const Register = () => {
                     </form>
 
                     <div style={{fontSize: '12px', marginTop: '15px', lineHeight: '1.5'}}>
-                        By creating an account, you agree to Shemsu's <Link to="/" style={{color: '#007185'}}>Conditions of Use</Link> and <Link to="/" style={{color: '#007185'}}>Privacy Notice</Link>.
+                        By creating an account, you agree to Shemsu Suk's <Link to="/" style={{color: '#007185'}}>Conditions of Use</Link> and <Link to="/" style={{color: '#007185'}}>Privacy Notice</Link>.
                     </div>
                     
                     <div className="amz-auth-divider" style={{width: '100%', margin: '20px 0 15px 0'}}></div>
@@ -120,7 +123,7 @@ const Register = () => {
                    <Link to="/" style={{color: '#007185'}}>Privacy Notice</Link>
                    <Link to="/" style={{color: '#007185'}}>Help</Link>
                 </div>
-                <div>© 1996-2026, Shemsu.com, Inc. or its affiliates</div>
+                <div>© 1996-2026, Shemsu Suk.com, Inc. or its affiliates</div>
             </div>
         </div>
     );

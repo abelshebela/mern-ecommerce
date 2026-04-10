@@ -32,7 +32,7 @@ const Cart = () => {
                     <h1>Shopping Cart</h1>
                     {cartItems.length === 0 ? (
                         <div style={{padding: '20px 0'}}>
-                            <h2 style={{fontSize: '18px', fontWeight: '500', marginBottom: '15px'}}>Your Shemsu Cart is empty.</h2>
+                            <h2 style={{fontSize: '18px', fontWeight: '500', marginBottom: '15px'}}>Your Shemsu Suk Cart is empty.</h2>
                             <Link to="/" style={{color: '#007185', fontSize: '14px'}}>Shop today's deals</Link>
                         </div>
                     ) : (

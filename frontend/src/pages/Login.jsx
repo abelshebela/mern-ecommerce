@@ -40,7 +40,10 @@ const Login = () => {
         <div style={{background: 'white', minHeight: '100vh'}}>
             <div className="amz-auth-container">
                 <Link to="/" style={{textDecoration: 'none'}}>
-                   <div className="amz-auth-logo">Shemsu<span>PRO</span></div>
+                   <div className="amz-auth-logo">
+                       <img src="/favicon.svg" alt="" style={{width: '40px', height: '40px', marginRight: '8px', verticalAlign: 'middle'}} />
+                       <span style={{verticalAlign: 'middle'}}>Shemsu Suk</span>
+                   </div>
                 </Link>
 
                 <div className="amz-auth-box">
@@ -79,16 +82,16 @@ const Login = () => {
                     </form>
 
                     <div style={{fontSize: '12px', marginTop: '15px', lineHeight: '1.5'}}>
-                        By continuing, you agree to Shemsu's <Link to="/" style={{color: '#007185'}}>Conditions of Use</Link> and <Link to="/" style={{color: '#007185'}}>Privacy Notice</Link>.
+                        By continuing, you agree to Shemsu Suk's <Link to="/" style={{color: '#007185'}}>Conditions of Use</Link> and <Link to="/" style={{color: '#007185'}}>Privacy Notice</Link>.
                     </div>
                 </div>
 
                 <div className="amz-auth-divider" style={{width: '350px'}}>
-                    <span>New to Shemsu?</span>
+                    <span>New to Shemsu Suk?</span>
                 </div>
 
                 <Link to={redirect !== '/' ? `/register?redirect=${redirect}` : '/register'} className="btn-amz-create" style={{width: '350px'}}>
-                    Create your Shemsu account
+                    Create your Shemsu Suk account
                 </Link>
             </div>
             <div style={{borderTop: '1px solid #ddd', padding: '30px 0', background: '#fafafa', textAlign: 'center', fontSize: '11px', color: '#555', marginTop: 'auto'}}>
@@ -97,7 +100,7 @@ const Login = () => {
                    <Link to="/" style={{color: '#007185'}}>Privacy Notice</Link>
                    <Link to="/" style={{color: '#007185'}}>Help</Link>
                 </div>
-                <div>© 1996-2026, Shemsu.com, Inc. or its affiliates</div>
+                <div>© 1996-2026, Shemsu Suk.com, Inc. or its affiliates</div>
             </div>
         </div>
     );

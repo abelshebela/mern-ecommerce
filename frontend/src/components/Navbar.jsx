@@ -55,9 +55,9 @@ const Navbar = () => {
            <Menu size={28} />
         </button>
 
-        <Link to="/" className="nav-logo-box" aria-label="Shemsu Home">
-          Shemsu
-          <span className="logo-prime-tick">PRO</span>
+        <Link to="/" className="nav-logo-box" aria-label="Shemsu Suk Home">
+          <img src="/favicon.svg" alt="" style={{width: '32px', height: '32px'}} />
+          <span style={{fontWeight: '800', letterSpacing: '-0.5px'}}>Shemsu Suk</span>
         </Link>
         
         <div className="nav-global-location hide-on-mobile">
@@ -76,8 +76,8 @@ const Navbar = () => {
             <option>Electronics</option>
             <option>Computers</option>
           </select>
-          <label htmlFor="search-input" className="sr-only">Search Shemsu</label>
-          <input id="search-input" type="text" className="search-input" placeholder="Search Shemsu" />
+          <label htmlFor="search-input" className="sr-only">Search Shemsu Suk</label>
+          <input id="search-input" type="text" className="search-input" placeholder="Search Shemsu Suk" />
           <button className="search-btn" aria-label="Submit Search">
             <Search size={22} />
           </button>

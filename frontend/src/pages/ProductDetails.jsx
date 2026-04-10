@@ -168,7 +168,7 @@ const ProductDetails = () => {
 
                     <div className="ships-from" style={{marginTop:'10px'}}>
                         <span>Ships from</span>
-                        <span>Shemsu</span>
+                        <span>Shemsu Suk</span>
                         <span>Sold by</span>
                         <span>{product.brand} Store</span>
                         <span>Returns</span>
